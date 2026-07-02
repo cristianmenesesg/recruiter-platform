@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfiles de búsqueda · Solvo Recruiter Platform</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="mobile-header">
+    <button class="hamburger-btn" onclick="toggleSidebar()" aria-label="Menú"><span></span><span></span><span></span></button>
+    <div class="mobile-logo"><div class="logo-icon">SRP</div><span class="logo-text">Solvo Recruiter Platform</span></div>
+  </header>
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <div class="app-container">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="header"><h1 class="header-title">Perfiles de búsqueda</h1></header>
+
+      <div class="page-content">
+        <p class="filter-hint" style="margin-bottom:16px;">Cada perfil define qué busca el pipeline. <b>Título</b> es el nombre interno de Solvo; <b>Búsqueda ES/EN</b> son los términos que usa el scraping en LinkedIn. El listado inicial se cargó en el prework desde el CSV de Solvo.</p>
+
+        <div class="table-container">
+          <div class="table-header-with-actions">
+            <div class="table-header-left"><span class="table-title">12 perfiles</span></div>
+            <div class="table-header-right">
+              <button class="btn btn-primary btn-sm" onclick="openNew()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                Nuevo perfil
+              </button>
+            </div>
+          </div>
+          <table>
+            <thead><tr>
+              <th>Título (interno)</th><th>Búsqueda ES</th><th>Búsqueda EN</th><th style="text-align:right;">Acciones</th>
+            </tr></thead>
+            <tbody id="perfilesBody">
+              <tr><td><span class="font-medium">CUSTOMER SERVICE REPRESENTATIVE</span></td><td class="text-secondary">Asesor de Servicio al Cliente, Agente de Atención al Cliente</td><td class="text-secondary">Customer Service Representative, Customer Service</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('CUSTOMER SERVICE REPRESENTATIVE')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">SALES REPRESENTATIVE</span></td><td class="text-secondary">Asesor Comercial, Ejecutivo de Ventas</td><td class="text-secondary">Sales Representative, Sales Executive</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SALES REPRESENTATIVE')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">SALES DEVELOPMENT REPRESENTATIVE</span></td><td class="text-secondary">Ejecutivo de Desarrollo de Negocios, Asesor de Prospección</td><td class="text-secondary">Sales Development Representative, SDR</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SALES DEVELOPMENT REPRESENTATIVE')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">SALES SPECIALIST</span></td><td class="text-secondary">Especialista Comercial, Especialista de Ventas</td><td class="text-secondary">Sales Specialist, Sales Executive</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SALES SPECIALIST')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">LEGAL ASSISTANT</span></td><td class="text-secondary">Asistente Legal, Asistente Jurídico</td><td class="text-secondary">Legal Assistant, Law Clerk</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('LEGAL ASSISTANT')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">PARALEGAL</span></td><td class="text-secondary">Paralegal, Asistente de Litigios</td><td class="text-secondary">Paralegal, Legal Support Officer</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('PARALEGAL')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">INTAKE SPECIALIST</span></td><td class="text-secondary">Coordinador de Admisiones, Asistente de Admisiones</td><td class="text-secondary">Intake Specialist, Intake Coordinator</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('INTAKE SPECIALIST')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">EXECUTIVE ASSISTANT</span></td><td class="text-secondary">Asistente Ejecutiva, Asistente Ejecutivo</td><td class="text-secondary">Executive Assistant, Executive Secretary</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('EXECUTIVE ASSISTANT')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">ADMINISTRATIVE ASSISTANT</span></td><td class="text-secondary">Asistente Administrativa, Asistente Administrativo</td><td class="text-secondary">Administrative Assistant, Office Assistant</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('ADMINISTRATIVE ASSISTANT')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">COLLECTIONS SPECIALIST</span></td><td class="text-secondary">Analista de Cobranzas, Gestor de Cobranzas</td><td class="text-secondary">Collections Specialist, Debt Collector</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('COLLECTIONS SPECIALIST')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">SCHEDULER</span></td><td class="text-secondary">Coordinador de Agendas, Programador de Citas</td><td class="text-secondary">Scheduler, Appointment Setter</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SCHEDULER')">Eliminar</button></div></td></tr>
+              <tr><td><span class="font-medium">CAD DESIGNER</span></td><td class="text-secondary">Diseñador CAD, Dibujante Técnico</td><td class="text-secondary">CAD Designer, AutoCAD Technician</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('CAD DESIGNER')">Eliminar</button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal crear/editar -->
+  <div class="modal-overlay" id="modalPerfil">
+    <div class="modal" style="max-width:520px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="perfilTitle">Nuevo perfil</h2>
+        <button class="modal-close" onclick="closeModal('modalPerfil')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group"><label class="form-label">Título (nombre interno de Solvo)</label>
+          <input class="form-input" id="fTitle" placeholder="Ej. CUSTOMER SERVICE REPRESENTATIVE"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Búsqueda en español</label>
+            <input class="form-input" id="fEs" placeholder="Ej. Asesor de Servicio al Cliente"></div>
+          <div class="form-group"><label class="form-label">Búsqueda en inglés</label>
+            <input class="form-input" id="fEn" placeholder="Ej. Customer Service Representative"></div>
+        </div>
+        <p class="filter-hint">El scraping ejecuta ambos términos (ES/EN) con <code>OR</code> en la consulta booleana.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modalPerfil')">Cancelar</button>
+        <button class="btn btn-primary" onclick="savePerfil()">Guardar perfil</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal eliminar -->
+  <div class="modal-overlay" id="modalDel">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-header"><h2 class="modal-title">Eliminar perfil</h2>
+        <button class="modal-close" onclick="closeModal('modalDel')"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div>
+      <div class="modal-body"><p style="color:var(--text-secondary); font-size:var(--font-size-sm);">¿Seguro que querés eliminar el perfil <b id="delName" style="color:var(--text-primary);">—</b>? El pipeline dejará de buscar candidatos para este perfil.</p></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('modalDel')">Cancelar</button>
+        <button class="btn btn-primary" onclick="closeModal('modalDel'); showToast('Perfil eliminado','info');">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+  <script>
+    initSession();
+    if (!canAccessAdmin()) window.location.href = 'candidatos.html';
+    renderSidebar('perfiles');
+    function openNew(){ document.getElementById('perfilTitle').textContent='Nuevo perfil'; fTitle.value=''; fEs.value=''; fEn.value=''; openModal('modalPerfil'); }
+    function openEdit(btn){ const t=btn.closest('tr').children; document.getElementById('perfilTitle').textContent='Editar perfil';
+      fTitle.value=t[0].innerText.trim(); fEs.value=t[1].innerText.trim(); fEn.value=t[2].innerText.trim(); openModal('modalPerfil'); }
+    function openDelete(name){ document.getElementById('delName').textContent=name; openModal('modalDel'); }
+    function savePerfil(){ closeModal('modalPerfil'); showToast('Perfil guardado','success'); }
+    document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('active'); }));
+  </script>
+</body>
+</html>

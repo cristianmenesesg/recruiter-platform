@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parámetros · Solvo Recruiter Platform</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="mobile-header">
+    <button class="hamburger-btn" onclick="toggleSidebar()" aria-label="Menú"><span></span><span></span><span></span></button>
+    <div class="mobile-logo"><div class="logo-icon">SRP</div><span class="logo-text">Solvo Recruiter Platform</span></div>
+  </header>
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <div class="app-container">
+    <div id="sidebar-container"></div>
+
+    <main class="main-content">
+      <header class="header"><h1 class="header-title">Parámetros</h1></header>
+
+      <div class="page-content">
+        <!-- Cadencia y vigencia -->
+        <div class="detail-card">
+          <div class="detail-card-title">Cadencia y vigencia</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Frecuencia de corrida — <code>frequency_days</code></label>
+              <input class="form-input" type="number" value="7" min="1">
+              <p class="filter-hint">Cada cuántos días corre el pipeline programado. Default: 7 días.</p>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Vigencia del candidato — <code>validity_days</code></label>
+              <input class="form-input" type="number" value="2" min="1">
+              <p class="filter-hint">Días que un candidato sigue vigente según su último análisis OTW. Si la consulta del recruiter supera este valor, se re-valida on-demand.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cobertura geográfica -->
+        <div class="detail-card" style="margin-top:16px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+            <div class="detail-card-title" style="margin:0;">Cobertura geográfica</div>
+            <button class="btn btn-secondary btn-sm">+ Agregar país</button>
+          </div>
+          <div id="geo"></div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:16px;">
+          <button class="btn btn-ghost" onclick="showToast('Cambios descartados','info')">Descartar</button>
+          <button class="btn btn-primary" onclick="showToast('Parámetros guardados','success')">Guardar parámetros</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+  <script>
+    initSession();
+    if (!canAccessAdmin()) window.location.href = 'candidatos.html';
+    renderSidebar('parametros');
+
+    const GEO = [
+      { country:'Argentina', cities:[['Buenos Aires',1], ['Córdoba',1], ['Mendoza',0], ['Rosario',0], ['La Plata',0]] },
+      { country:'Belice', cities:[['Ciudad de Belice',0], ['Belmopán',0], ['San Ignacio',0], ['Orange Walk',0], ['Corozal',0]] },
+      { country:'Colombia', cities:[['Armenia',0], ['Barranquilla',1], ['Bogotá D.C.',1], ['Bucaramanga',0], ['Cali',1], ['Ibagué',0], ['Medellín',1]] },
+      { country:'Guatemala', cities:[['Ciudad de Guatemala',1], ['Mixco',0], ['Villa Nueva',0], ['Quetzaltenango',0], ['Escuintla',0]] },
+      { country:'Honduras', cities:[['Tegucigalpa',0], ['San Pedro Sula',1], ['Choloma',0], ['La Ceiba',0], ['El Progreso',0]] },
+      { country:'México', cities:[['Aguascalientes',0], ['Chihuahua',0], ['Ciudad de México',1], ['Yucatán',0]] },
+      { country:'Perú', cities:[['Lima',1], ['Arequipa',0], ['Trujillo',0], ['Chiclayo',0], ['Piura',0]] },
+    ];
+    document.getElementById('geo').innerHTML = GEO.map(g => `
+      <div class="geo-country">
+        <div class="geo-country-head">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span class="badge badge-info">${g.country}</span>
+            <span class="text-muted" style="font-size:var(--font-size-xs);">${g.cities.filter(c=>c[1]).length} de ${g.cities.length} ciudades activas</span>
+          </div>
+          <button class="btn btn-ghost btn-sm">+ Ciudad</button>
+        </div>
+        <div class="geo-cities">
+          ${g.cities.map(c => `<label class="toggle-pill"><input type="checkbox" ${c[1]?'checked':''}><span class="toggle-pill-track"><span class="toggle-pill-knob"></span></span>${c[0]}</label>`).join('')}
+        </div>
+      </div>`).join('');
+  </script>
+</body>
+</html>

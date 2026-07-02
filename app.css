@@ -117,11 +117,84 @@
 .drawer-kv b { min-width: 90px; color: var(--text-muted); font-weight: 500; }
 .drawer-kv span { color: var(--text-primary); }
 
-/* ---------- Geo (parámetros) ---------- */
-.geo-country { padding: var(--spacing-md) 0; border-bottom: 1px solid var(--border-color); }
-.geo-country:last-child { border-bottom: none; }
-.geo-country-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.geo-cities { display: flex; flex-wrap: wrap; gap: 20px; }
+/* ---------- Geo (parámetros): cobertura geográfica ---------- */
+
+/* Cabecera de la tarjeta: título + resumen + acción */
+.geo-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: var(--spacing-md); }
+.geo-summary { margin-top: 4px; font-size: var(--font-size-xs); color: var(--text-muted); }
+
+/* Nota de auto-guardado (reemplaza los botones Guardar/Descartar) */
+.autosave-note {
+  display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+  margin-top: 16px; font-size: var(--font-size-xs); color: var(--text-muted);
+}
+
+/* Toolbar: buscador + filtro de estado */
+.geo-toolbar { display: flex; align-items: center; gap: 12px; margin-bottom: var(--spacing-md); flex-wrap: wrap; }
+.geo-toolbar .geo-search { flex: 1; min-width: 220px; margin-bottom: 0; }
+.geo-filter { display: flex; gap: 6px; flex-shrink: 0; }
+
+/* Buscador */
+.geo-search {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-tertiary); border: 1px solid var(--border-color);
+  border-radius: var(--radius-md); padding: 8px 12px; margin-bottom: var(--spacing-md);
+  color: var(--text-muted); transition: border-color .2s, box-shadow .2s;
+}
+.geo-search:focus-within { border-color: var(--text-secondary); box-shadow: 0 0 0 3px rgba(255,255,255,0.06); }
+.geo-search svg { flex-shrink: 0; }
+.geo-search-input {
+  flex: 1; min-width: 0; background: none; border: none; outline: none;
+  color: var(--text-primary); font-family: var(--font-family); font-size: var(--font-size-sm);
+}
+.geo-search-input::placeholder { color: var(--text-muted); }
+
+/* Tabla de ciudades */
+.loc-table th { cursor: default; }
+.loc-table th:hover { color: var(--text-muted); }
+.loc-table td { vertical-align: middle; }
+.loc-table .loc-name { color: var(--text-primary); }
+.loc-table th.loc-toggle, .loc-table td.loc-toggle { width: 96px; text-align: center; }
+.loc-table th.loc-action, .loc-table td.loc-action { width: 52px; text-align: right; }
+.loc-table .toggle-pill { height: auto; justify-content: center; }
+.loc-table tr:hover .geo-remove-loc { opacity: .75; }
+
+.geo-remove-loc {
+  width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;
+  background: none; border: none; border-radius: var(--radius-sm); cursor: pointer;
+  color: var(--text-muted); font-size: 13px; line-height: 1; opacity: 0;
+  transition: opacity .15s ease, color .15s ease, background-color .15s ease;
+}
+.geo-remove-loc:hover { opacity: 1; color: var(--text-primary); background: var(--bg-hover); }
+.geo-city-empty { font-size: var(--font-size-sm); color: var(--text-muted); }
+
+/* Empty state de la cobertura (dentro de la tabla) */
+.geo-empty {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: var(--spacing-xl); text-align: center; color: var(--text-muted);
+}
+.geo-empty p { font-size: var(--font-size-sm); }
+
+/* Tabla de perfiles de búsqueda */
+.perf-table th { cursor: default; }
+.perf-table th:hover { color: var(--text-muted); }
+.perf-table th.perf-action, .perf-table td.perf-action { text-align: right; width: 150px; white-space: nowrap; }
+.perf-table .row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+
+/* Combobox de país (modal agregar ciudad) */
+.combo { position: relative; }
+.combo-list {
+  display: none; margin-top: 6px; max-height: 208px; overflow-y: auto;
+  background: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: var(--radius-md);
+}
+.combo.open .combo-list { display: block; }
+.combo-option {
+  display: block; width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+  padding: 9px 12px; color: var(--text-primary);
+  font-family: var(--font-family); font-size: var(--font-size-sm);
+  transition: background-color .15s ease;
+}
+.combo-option:hover { background: var(--bg-hover); }
 
 /* small empty-state tweaks reuse .empty-state from styles.css */
 .empty-state.show { display: flex; }

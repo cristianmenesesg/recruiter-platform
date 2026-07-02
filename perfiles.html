@@ -23,35 +23,35 @@
       <div class="page-content">
         <p class="filter-hint" style="margin-bottom:16px;">Cada perfil define qué busca el pipeline. <b>Título</b> es el nombre interno de Solvo; <b>Búsqueda ES/EN</b> son los términos que usa el scraping en LinkedIn. El listado inicial se cargó en el prework desde el CSV de Solvo.</p>
 
+        <div class="geo-toolbar">
+          <div class="geo-search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            <input id="perfSearch" class="geo-search-input" type="text" placeholder="Buscar por título, búsqueda ES o EN…" autocomplete="off">
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openNew()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+            Nuevo perfil
+          </button>
+        </div>
+
         <div class="table-container">
-          <div class="table-header-with-actions">
-            <div class="table-header-left"><span class="table-title">12 perfiles</span></div>
-            <div class="table-header-right">
-              <button class="btn btn-primary btn-sm" onclick="openNew()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-                Nuevo perfil
-              </button>
+          <table class="perf-table">
+            <thead><tr>
+              <th>Título (interno)</th>
+              <th>Búsqueda ES</th>
+              <th>Búsqueda EN</th>
+              <th class="perf-action">Acciones</th>
+            </tr></thead>
+            <tbody id="perfilesBody"></tbody>
+          </table>
+          <div class="table-pagination" id="perfPager" style="display:none;">
+            <span class="pagination-info" id="perfPagerInfo"></span>
+            <div class="pagination-controls">
+              <button class="pagination-btn" id="perfPrev" type="button">‹ Anterior</button>
+              <span class="pagination-info" id="perfPagerPages"></span>
+              <button class="pagination-btn" id="perfNext" type="button">Siguiente ›</button>
             </div>
           </div>
-          <table>
-            <thead><tr>
-              <th>Título (interno)</th><th>Búsqueda ES</th><th>Búsqueda EN</th><th style="text-align:right;">Acciones</th>
-            </tr></thead>
-            <tbody id="perfilesBody">
-              <tr><td><span class="font-medium">CUSTOMER SERVICE REPRESENTATIVE</span></td><td class="text-secondary">Asesor de Servicio al Cliente, Agente de Atención al Cliente</td><td class="text-secondary">Customer Service Representative, Customer Service</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('CUSTOMER SERVICE REPRESENTATIVE')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">SALES REPRESENTATIVE</span></td><td class="text-secondary">Asesor Comercial, Ejecutivo de Ventas</td><td class="text-secondary">Sales Representative, Sales Executive</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SALES REPRESENTATIVE')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">SALES DEVELOPMENT REPRESENTATIVE</span></td><td class="text-secondary">Ejecutivo de Desarrollo de Negocios, Asesor de Prospección</td><td class="text-secondary">Sales Development Representative, SDR</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SALES DEVELOPMENT REPRESENTATIVE')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">SALES SPECIALIST</span></td><td class="text-secondary">Especialista Comercial, Especialista de Ventas</td><td class="text-secondary">Sales Specialist, Sales Executive</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SALES SPECIALIST')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">LEGAL ASSISTANT</span></td><td class="text-secondary">Asistente Legal, Asistente Jurídico</td><td class="text-secondary">Legal Assistant, Law Clerk</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('LEGAL ASSISTANT')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">PARALEGAL</span></td><td class="text-secondary">Paralegal, Asistente de Litigios</td><td class="text-secondary">Paralegal, Legal Support Officer</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('PARALEGAL')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">INTAKE SPECIALIST</span></td><td class="text-secondary">Coordinador de Admisiones, Asistente de Admisiones</td><td class="text-secondary">Intake Specialist, Intake Coordinator</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('INTAKE SPECIALIST')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">EXECUTIVE ASSISTANT</span></td><td class="text-secondary">Asistente Ejecutiva, Asistente Ejecutivo</td><td class="text-secondary">Executive Assistant, Executive Secretary</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('EXECUTIVE ASSISTANT')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">ADMINISTRATIVE ASSISTANT</span></td><td class="text-secondary">Asistente Administrativa, Asistente Administrativo</td><td class="text-secondary">Administrative Assistant, Office Assistant</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('ADMINISTRATIVE ASSISTANT')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">COLLECTIONS SPECIALIST</span></td><td class="text-secondary">Analista de Cobranzas, Gestor de Cobranzas</td><td class="text-secondary">Collections Specialist, Debt Collector</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('COLLECTIONS SPECIALIST')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">SCHEDULER</span></td><td class="text-secondary">Coordinador de Agendas, Programador de Citas</td><td class="text-secondary">Scheduler, Appointment Setter</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('SCHEDULER')">Eliminar</button></div></td></tr>
-              <tr><td><span class="font-medium">CAD DESIGNER</span></td><td class="text-secondary">Diseñador CAD, Dibujante Técnico</td><td class="text-secondary">CAD Designer, AutoCAD Technician</td><td><div class="row-actions" style="display:flex;gap:6px;justify-content:flex-end;"><button class="btn btn-ghost btn-sm" onclick="openEdit(this)">Editar</button><button class="btn btn-ghost btn-sm" onclick="openDelete('CAD DESIGNER')">Eliminar</button></div></td></tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </main>
@@ -90,7 +90,7 @@
       <div class="modal-body"><p style="color:var(--text-secondary); font-size:var(--font-size-sm);">¿Seguro que querés eliminar el perfil <b id="delName" style="color:var(--text-primary);">—</b>? El pipeline dejará de buscar candidatos para este perfil.</p></div>
       <div class="modal-footer">
         <button class="btn btn-secondary" onclick="closeModal('modalDel')">Cancelar</button>
-        <button class="btn btn-primary" onclick="closeModal('modalDel'); showToast('Perfil eliminado','info');">Eliminar</button>
+        <button class="btn btn-primary" onclick="confirmDelete()">Eliminar</button>
       </div>
     </div>
   </div>
@@ -102,12 +102,157 @@
     initSession();
     if (!canAccessAdmin()) window.location.href = 'candidatos.html';
     renderSidebar('perfiles');
-    function openNew(){ document.getElementById('perfilTitle').textContent='Nuevo perfil'; fTitle.value=''; fEs.value=''; fEn.value=''; openModal('modalPerfil'); }
-    function openEdit(btn){ const t=btn.closest('tr').children; document.getElementById('perfilTitle').textContent='Editar perfil';
-      fTitle.value=t[0].innerText.trim(); fEs.value=t[1].innerText.trim(); fEn.value=t[2].innerText.trim(); openModal('modalPerfil'); }
-    function openDelete(name){ document.getElementById('delName').textContent=name; openModal('modalDel'); }
-    function savePerfil(){ closeModal('modalPerfil'); showToast('Perfil guardado','success'); }
-    document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if(e.target===m) m.classList.remove('active'); }));
+
+    /* ---------------- Datos ---------------- */
+    const PERFILES = [
+      { title:'CUSTOMER SERVICE REPRESENTATIVE',    es:'Asesor de Servicio al Cliente, Agente de Atención al Cliente', en:'Customer Service Representative, Customer Service' },
+      { title:'SALES REPRESENTATIVE',               es:'Asesor Comercial, Ejecutivo de Ventas',                        en:'Sales Representative, Sales Executive' },
+      { title:'SALES DEVELOPMENT REPRESENTATIVE',   es:'Ejecutivo de Desarrollo de Negocios, Asesor de Prospección',   en:'Sales Development Representative, SDR' },
+      { title:'SALES SPECIALIST',                   es:'Especialista Comercial, Especialista de Ventas',               en:'Sales Specialist, Sales Executive' },
+      { title:'LEGAL ASSISTANT',                    es:'Asistente Legal, Asistente Jurídico',                          en:'Legal Assistant, Law Clerk' },
+      { title:'PARALEGAL',                          es:'Paralegal, Asistente de Litigios',                             en:'Paralegal, Legal Support Officer' },
+      { title:'INTAKE SPECIALIST',                  es:'Coordinador de Admisiones, Asistente de Admisiones',           en:'Intake Specialist, Intake Coordinator' },
+      { title:'EXECUTIVE ASSISTANT',                es:'Asistente Ejecutiva, Asistente Ejecutivo',                     en:'Executive Assistant, Executive Secretary' },
+      { title:'ADMINISTRATIVE ASSISTANT',           es:'Asistente Administrativa, Asistente Administrativo',           en:'Administrative Assistant, Office Assistant' },
+      { title:'COLLECTIONS SPECIALIST',             es:'Analista de Cobranzas, Gestor de Cobranzas',                   en:'Collections Specialist, Debt Collector' },
+      { title:'SCHEDULER',                          es:'Coordinador de Agendas, Programador de Citas',                 en:'Scheduler, Appointment Setter' },
+      { title:'CAD DESIGNER',                       es:'Diseñador CAD, Dibujante Técnico',                             en:'CAD Designer, AutoCAD Technician' },
+    ];
+
+    const PAGE_SIZE = 10;
+    let perfFilter = '';
+    let perfPage = 0;
+    let editIndex = -1;   // -1 = nuevo
+    let delIndex = -1;
+
+    /* ---------------- Utilidades ---------------- */
+    function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function norm(s){ return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+    /* Fuzzy: subsecuencia tolerante (estilo fzf), ignora espacios; -1 si no matchea */
+    function fuzzyScore(qn, text){
+      if (!qn) return 0;
+      const t = norm(text).replace(/\s+/g,'');
+      let ti = 0, score = 0, streak = 0, first = -1;
+      for (let k = 0; k < qn.length; k++){
+        const idx = t.indexOf(qn[k], ti);
+        if (idx === -1) return -1;
+        if (first === -1) first = idx;
+        if (idx === ti){ streak++; score += 2 + streak; } else { streak = 0; score += 1; }
+        ti = idx + 1;
+      }
+      return score - first * 0.05;
+    }
+
+    function filteredProfiles(){
+      const qn = norm(perfFilter.trim()).replace(/\s+/g,'');
+      let list = PERFILES.map((p, i) => ({
+        p, i,
+        score: qn ? Math.max(fuzzyScore(qn, p.title), fuzzyScore(qn, p.es), fuzzyScore(qn, p.en)) : 0
+      }));
+      if (qn) list = list.filter(x => x.score >= 0).sort((a, b) => b.score - a.score);
+      return list;
+    }
+
+    /* ---------------- Render ---------------- */
+    const body = document.getElementById('perfilesBody');
+
+    function emptyRow(text, withBtn){
+      return `<tr><td colspan="4"><div class="geo-empty"><p>${text}</p>${withBtn ? `<button class="btn btn-primary btn-sm" onclick="openNew()">+ Nuevo perfil</button>` : ''}</div></td></tr>`;
+    }
+
+    function renderPerfiles(){
+      const pager = document.getElementById('perfPager');
+
+      if (!PERFILES.length){ body.innerHTML = emptyRow('Sin perfiles de búsqueda.', true); pager.style.display = 'none'; return; }
+
+      const rows = filteredProfiles();
+      if (!rows.length){
+        body.innerHTML = emptyRow(`Sin resultados para “${esc(perfFilter.trim())}”.`, false);
+        pager.style.display = 'none';
+        return;
+      }
+
+      const pages = Math.ceil(rows.length / PAGE_SIZE);
+      if (perfPage >= pages) perfPage = pages - 1;
+      if (perfPage < 0) perfPage = 0;
+      const start = perfPage * PAGE_SIZE;
+      const slice = rows.slice(start, start + PAGE_SIZE);
+
+      body.innerHTML = slice.map(({p, i}) => `
+        <tr data-i="${i}">
+          <td><span class="font-medium">${esc(p.title)}</span></td>
+          <td class="text-secondary">${esc(p.es)}</td>
+          <td class="text-secondary">${esc(p.en)}</td>
+          <td class="perf-action">
+            <div class="row-actions">
+              <button class="btn btn-ghost btn-sm" data-act="edit">Editar</button>
+              <button class="btn btn-ghost btn-sm" data-act="del">Eliminar</button>
+            </div>
+          </td>
+        </tr>`).join('');
+
+      pager.style.display = '';
+      document.getElementById('perfPagerInfo').textContent = `${start + 1}–${start + slice.length} de ${rows.length}`;
+      document.getElementById('perfPagerPages').textContent = `Página ${perfPage + 1} de ${pages}`;
+      document.getElementById('perfPrev').disabled = perfPage === 0;
+      document.getElementById('perfNext').disabled = perfPage >= pages - 1;
+    }
+
+    /* ---------------- Interacción ---------------- */
+    body.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-act]');
+      if (!btn) return;
+      const i = +btn.closest('tr').dataset.i;
+      if (btn.dataset.act === 'edit') openEdit(i);
+      else openDelete(i);
+    });
+
+    document.getElementById('perfSearch').addEventListener('input', (e) => { perfFilter = e.target.value; perfPage = 0; renderPerfiles(); });
+    document.getElementById('perfPrev').addEventListener('click', () => { if (perfPage > 0){ perfPage--; renderPerfiles(); } });
+    document.getElementById('perfNext').addEventListener('click', () => { perfPage++; renderPerfiles(); });
+
+    /* ---------------- CRUD (modales) ---------------- */
+    const fTitle = document.getElementById('fTitle'), fEs = document.getElementById('fEs'), fEn = document.getElementById('fEn');
+
+    function openNew(){
+      editIndex = -1;
+      document.getElementById('perfilTitle').textContent = 'Nuevo perfil';
+      fTitle.value = ''; fEs.value = ''; fEn.value = '';
+      openModal('modalPerfil');
+      setTimeout(() => fTitle.focus(), 210);
+    }
+    function openEdit(i){
+      editIndex = i;
+      const p = PERFILES[i];
+      document.getElementById('perfilTitle').textContent = 'Editar perfil';
+      fTitle.value = p.title; fEs.value = p.es; fEn.value = p.en;
+      openModal('modalPerfil');
+    }
+    function savePerfil(){
+      const title = fTitle.value.trim(), es = fEs.value.trim(), en = fEn.value.trim();
+      if (!title){ showToast('El título es obligatorio','info'); fTitle.focus(); return; }
+      if (!es && !en){ showToast('Ingresá al menos un término (ES o EN)','info'); fEs.focus(); return; }
+      if (editIndex === -1){ PERFILES.push({ title, es, en }); showToast('Perfil creado','success'); }
+      else { PERFILES[editIndex] = { title, es, en }; showToast('Perfil actualizado','success'); }
+      closeModal('modalPerfil');
+      renderPerfiles();
+    }
+    function openDelete(i){
+      delIndex = i;
+      document.getElementById('delName').textContent = PERFILES[i].title;
+      openModal('modalDel');
+    }
+    function confirmDelete(){
+      if (delIndex >= 0){ PERFILES.splice(delIndex, 1); delIndex = -1; }
+      closeModal('modalDel');
+      renderPerfiles();
+      showToast('Perfil eliminado','info');
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); }));
+
+    renderPerfiles();
   </script>
 </body>
 </html>
